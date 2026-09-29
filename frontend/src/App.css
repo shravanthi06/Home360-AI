@@ -1,184 +1,907 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* =========================================
+   HOME360-AI
+   REAL APP UI
+========================================= */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================
+   MAIN APP
+========================================= */
+
+.app {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+/* =========================================
+   HOME DASHBOARD
+========================================= */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 42px 6%;
+}
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
+  background: linear-gradient(135deg, #111827, #1d4ed8);
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 48px 52px;
   position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+}
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -100px;
+  top: -130px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: 170px;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.small-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #bfdbfe;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 46px;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+.subtitle {
+  color: #e0ecff;
+  font-size: 17px;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================
+   HOME MODULES
+========================================= */
+
+.module-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.module-card {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 22px;
+  padding: 28px;
+  min-height: 210px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.25s ease;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.module-card::after {
+  content: "→";
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  font-size: 22px;
+  color: #64748b;
+  transition: 0.25s ease;
+}
+
+.module-card:hover {
+  transform: translateY(-7px);
+  border-color: #93c5fd;
+  box-shadow: 0 18px 38px rgba(30, 64, 175, 0.14);
+}
+
+.module-card:hover::after {
+  right: 18px;
+  color: #1d4ed8;
+}
+
+.icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+  font-size: 26px;
+  margin-bottom: 22px;
+}
+
+.module-card h2 {
+  font-size: 20px;
+  margin-bottom: 9px;
+  color: #111827;
+}
+
+.module-card p {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 14px;
+  max-width: 210px;
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 38px;
+  color: #475569;
+  font-size: 13px;
+}
+
+/* =========================================
+   INNER MODULE PAGE
+========================================= */
+
+.module-page {
+  min-height: 100vh;
+  padding: 28px 6% 60px;
+}
+
+.back-button {
+  border: 1px solid #dbe3ef;
+  background: #ffffff;
+  color: #1e293b;
+  padding: 11px 17px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+  transform: translateX(-3px);
+}
+
+/* =========================================
+   PAGE HEADERS
+========================================= */
+
+.services-header,
+.finance-header {
+  margin-bottom: 28px;
+}
+
+.section-label {
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  margin-bottom: 8px;
+}
+
+.services-header h1,
+.finance-header h1 {
+  font-size: 34px;
+  letter-spacing: -0.8px;
+  color: #111827;
+  margin-bottom: 7px;
+}
+
+.services-header p,
+.finance-header > p:last-child {
+  color: #475569;
+  font-size: 15px;
+}
+
+/* =========================================
+   HOME SERVICES SEARCH
+========================================= */
+
+.services-tools {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  padding: 18px;
+  border-radius: 18px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.services-tools input,
+.services-tools select {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  padding: 13px 15px;
+  border-radius: 11px;
+  outline: none;
+  font-size: 14px;
+  color: #111827;
+}
+
+.services-tools input {
+  flex: 1;
+}
+
+.services-tools input::placeholder {
+  color: #64748b;
+}
+
+.services-tools input:focus,
+.services-tools select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+/* =========================================
+   PROVIDERS
+========================================= */
+
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.provider-card {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 7px 24px rgba(15, 23, 42, 0.06);
+  transition: 0.25s ease;
+}
+
+.provider-card:hover {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.10);
+}
+
+.provider-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.provider-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.available,
+.busy {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 11px;
+  border-radius: 20px;
+}
+
+.available {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.busy {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.provider-card h2 {
+  font-size: 19px;
+  margin-bottom: 5px;
+  color: #111827;
+}
+
+.service-name {
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.provider-details {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  color: #475569;
+  font-size: 13px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.status-box {
+  margin-top: 15px;
+  padding: 11px 13px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  color: #334155;
+  font-size: 13px;
+}
+
+.status-box strong {
+  color: #111827;
+}
+
+.provider-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.provider-buttons button {
+  flex: 1;
+  border: none;
+  padding: 11px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.profile-button {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.profile-button:hover {
+  background: #cbd5e1;
+}
+
+.request-button,
+.next-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.request-button:hover,
+.next-button:hover {
+  background: #1d4ed8;
+}
+
+.request-button:disabled {
+  background: #94a3b8;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   FINANCE SUMMARY
+========================================= */
+
+.finance-page {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.expense-summary,
+.bill-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.expense-summary {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.summary-card,
+.bill-summary-card {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.summary-card span,
+.bill-summary-card span {
+  display: block;
+  color: #475569;
+  font-size: 12px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.summary-card strong,
+.bill-summary-card strong {
+  font-size: 25px;
+  color: #111827;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+.expense-form-card,
+.bill-form-card {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 7px 24px rgba(15, 23, 42, 0.05);
+}
+
+.expense-form-card h2,
+.bill-form-card h2,
+.expense-list h2,
+.bill-list h2 {
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: #111827;
+}
+
+.expense-form,
+.bill-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.expense-form input,
+.bill-form input {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  padding: 13px;
+  border-radius: 10px;
+  outline: none;
+  color: #111827;
+}
+
+.expense-form input::placeholder,
+.bill-form input::placeholder {
+  color: #64748b;
+}
+
+.expense-form input:focus,
+.bill-form input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+.expense-form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.primary-button,
+.secondary-button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+.secondary-button {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.secondary-button:hover {
+  background: #cbd5e1;
+}
+
+/* =========================================
+   EXPENSES
+========================================= */
+
+.expense-list,
+.bill-list {
+  margin-top: 10px;
+}
+
+.expense-card,
+.bill-card {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 11px;
+  transition: 0.2s ease;
+}
+
+.expense-card:hover,
+.bill-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+}
+
+.expense-icon,
+.bill-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.expense-info,
+.bill-info {
+  flex: 1;
+}
+
+.expense-info h3,
+.bill-info h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.expense-info p,
+.bill-info p {
+  color: #475569;
+  font-size: 12px;
+}
+
+.expense-info small {
+  display: block;
+  margin-top: 5px;
+  color: #64748b;
+}
+
+.expense-amount,
+.bill-amount {
+  font-weight: 800;
+  color: #111827;
+  min-width: 80px;
+}
+
+.expense-actions,
+.bill-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.edit-button,
+.delete-button,
+.paid-button {
+  border: none;
+  padding: 8px 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.edit-button {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.edit-button:hover {
+  background: #bfdbfe;
+}
+
+.delete-button {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.delete-button:hover {
+  background: #fecaca;
+}
+
+.paid-button {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.paid-button:hover {
+  background: #bbf7d0;
+}
+
+/* =========================================
+   BILL STATUS
+========================================= */
+
+.paid-status,
+.pending-status {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.paid-status {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.pending-status {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+/* =========================================
+   BUDGET
+========================================= */
+
+.budget-main-card {
+  background: linear-gradient(135deg, #111827, #1d4ed8);
+  color: #ffffff;
+  border-radius: 23px;
+  padding: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.18);
+}
+
+.budget-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.budget-top span {
+  color: #dbeafe;
+  font-size: 13px;
+}
+
+.budget-top h2 {
+  font-size: 34px;
+  margin-top: 5px;
+  color: #ffffff;
+}
+
+.budget-top .primary-button {
+  background: #ffffff;
+  color: #1d4ed8;
+}
+
+.budget-top .primary-button:hover {
+  background: #eff6ff;
+}
+
+.budget-progress {
+  margin-top: 15px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  color: #dbeafe;
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+
+.progress-label strong {
+  color: #ffffff;
+}
+
+.progress-bar {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.20);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+/* =========================================
+   BUDGET CARDS
+========================================= */
+
+.budget-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.budget-card {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.budget-card span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.budget-card strong {
+  display: block;
+  font-size: 25px;
+  margin: 8px 0;
+  color: #111827;
+}
+
+.budget-card p {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* =========================================
+   BUDGET STATUS
+========================================= */
+
+.budget-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.status-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.budget-status h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.budget-status p {
+  color: #475569;
+  font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .module-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+  .expense-summary,
+  .bill-summary {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
+@media (max-width: 750px) {
+  .dashboard,
+  .module-page {
+    padding: 25px 20px;
+  }
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
+  .hero {
+    padding: 35px 28px;
+  }
+
+  .hero h1 {
+    font-size: 35px;
+  }
+
+  .module-container,
+  .provider-grid,
+  .budget-cards,
+  .expense-form,
+  .bill-form {
+    grid-template-columns: 1fr;
+  }
+
+  .services-tools {
+    flex-direction: column;
+  }
+
+  .expense-card,
+  .bill-card {
+    flex-wrap: wrap;
+  }
+
+  .expense-actions,
+  .bill-actions {
+    width: 100%;
+  }
+
+  .expense-actions button,
+  .bill-actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .expense-summary,
+  .bill-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-top {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 18px;
   }
-}
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
+  .budget-top .primary-button {
+    width: 100%;
   }
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
+  .provider-buttons {
     flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
-
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
   }
 }
