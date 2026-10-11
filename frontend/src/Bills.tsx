@@ -1,221 +1,338 @@
-import { useState } from "react";
 
-type Bill = {
-  id: number;
-  name: string;
+import { useEffect, useState, type FormEvent } from "react";
+
+const API = "http://localhost:5000/api/bills";
+
+interface Bill {
+  _id: string;
+  title: string;
+  category: string;
   amount: number;
   dueDate: string;
-  status: "Pending" | "Paid";
+  status: "Paid" | "Pending";
+  notes?: string;
+}
+
+const emptyForm = {
+  title: "",
+  category: "Utilities",
+  amount: "",
+  dueDate: "",
+  status: "Pending" as "Paid" | "Pending",
+  notes: "",
 };
 
 function Bills() {
-  const [bills, setBills] = useState<Bill[]>([
-    {
-      id: 1,
-      name: "Electricity",
-      amount: 1200,
-      dueDate: "2026-09-10",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      name: "Internet",
-      amount: 800,
-      dueDate: "2026-09-05",
-      status: "Paid",
-    },
-  ]);
+  const [bills, setBills] = useState<Bill[]>([]);
+  const [form, setForm] = useState(emptyForm);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
 
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  async function loadBills() {
+    try {
+      setError("");
+      const response = await fetch(API);
 
-  const addBill = () => {
-    if (!name || !amount || !dueDate) {
-      alert("Please fill all fields");
+      if (!response.ok) {
+        throw new Error("Unable to fetch bills");
+      }
+
+      const data = await response.json();
+      setBills(data);
+    } catch {
+      setError("Cannot load bills. Check that your backend is running.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadBills();
+  }, []);
+
+  async function addBill(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSaving(true);
+    setError("");
+
+    try {
+      const response = await fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          amount: Number(form.amount),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to save bill");
+      }
+
+      setForm(emptyForm);
+      await loadBills();
+    } catch {
+      setError("Could not save the bill. Please try again.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function updateBill(bill: Bill) {
+    try {
+      setError("");
+
+      const response = await fetch(`${API}/${bill._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          status: bill.status === "Paid" ? "Pending" : "Paid",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to update bill");
+      }
+
+      await loadBills();
+    } catch {
+      setError("Could not update bill status.");
+    }
+  }
+
+  async function deleteBill(id: string) {
+    if (!window.confirm("Are you sure you want to delete this bill?")) {
       return;
     }
 
-    const newBill: Bill = {
-      id: Date.now(),
-      name,
-      amount: Number(amount),
-      dueDate,
-      status: "Pending",
-    };
+    try {
+      setError("");
+      const response = await fetch(`${API}/${id}`, {
+        method: "DELETE",
+      });
 
-    setBills([...bills, newBill]);
+      if (!response.ok) {
+        throw new Error("Unable to delete bill");
+      }
 
-    setName("");
-    setAmount("");
-    setDueDate("");
-  };
+      await loadBills();
+    } catch {
+      setError("Could not delete bill.");
+    }
+  }
 
-  const markAsPaid = (id: number) => {
-    setBills(
-      bills.map((bill) =>
-        bill.id === id
-          ? { ...bill, status: "Paid" }
-          : bill
-      )
-    );
-  };
-
-  const deleteBill = (id: number) => {
-    setBills(
-      bills.filter((bill) => bill.id !== id)
-    );
-  };
-
-  const totalBills = bills.reduce(
-    (total, bill) => total + bill.amount,
+  const totalAmount = bills.reduce(
+    (total, bill) => total + Number(bill.amount || 0),
     0
   );
 
-  const pendingBills = bills.filter(
-    (bill) => bill.status === "Pending"
-  ).length;
-
-  const paidBills = bills.filter(
-    (bill) => bill.status === "Paid"
-  ).length;
+  const pendingAmount = bills
+    .filter((bill) => bill.status === "Pending")
+    .reduce((total, bill) => total + Number(bill.amount || 0), 0);
 
   return (
-    <div className="finance-page">
+    <div style={{ maxWidth: 1000, margin: "0 auto", padding: 20 }}>
+      <h2>🧾 Bills Management</h2>
+      <p>Manage your home bills using live backend data.</p>
 
-      <div className="finance-header">
-        <p className="section-label">HOME FINANCE</p>
-
-        <h1>Bills</h1>
-
-        <p>
-          Keep track of your household bills and payment status.
+      {error && (
+        <p style={{ color: "crimson" }} role="alert">
+          {error}
         </p>
+      )}
+
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          flexWrap: "wrap",
+          margin: "20px 0",
+        }}
+      >
+        <div style={cardStyle}>
+          <h3>Total Bills</h3>
+          <p>{bills.length}</p>
+        </div>
+
+        <div style={cardStyle}>
+          <h3>Total Amount</h3>
+          <p>₹{totalAmount.toLocaleString("en-IN")}</p>
+        </div>
+
+        <div style={cardStyle}>
+          <h3>Pending Amount</h3>
+          <p>₹{pendingAmount.toLocaleString("en-IN")}</p>
+        </div>
       </div>
 
-      <div className="bill-summary">
+      <form
+        onSubmit={addBill}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: 12,
+          padding: 20,
+          border: "1px solid #ddd",
+          borderRadius: 12,
+          marginBottom: 24,
+        }}
+      >
+        <h3 style={{ gridColumn: "1 / -1" }}>Add New Bill</h3>
 
-        <div className="bill-summary-card">
-          <span>Total Bills</span>
-          <strong>{bills.length}</strong>
-        </div>
+        <input
+          placeholder="Bill title"
+          value={form.title}
+          onChange={(e) =>
+            setForm({ ...form, title: e.target.value })
+          }
+          required
+        />
 
-        <div className="bill-summary-card">
-          <span>Pending</span>
-          <strong>{pendingBills}</strong>
-        </div>
+        <select
+          value={form.category}
+          onChange={(e) =>
+            setForm({ ...form, category: e.target.value })
+          }
+        >
+          <option>Utilities</option>
+          <option>Electricity</option>
+          <option>Water</option>
+          <option>Internet</option>
+          <option>Maintenance</option>
+          <option>Other</option>
+        </select>
 
-        <div className="bill-summary-card">
-          <span>Paid</span>
-          <strong>{paidBills}</strong>
-        </div>
+        <input
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="Amount (₹)"
+          value={form.amount}
+          onChange={(e) =>
+            setForm({ ...form, amount: e.target.value })
+          }
+          required
+        />
 
-        <div className="bill-summary-card">
-          <span>Total Amount</span>
-          <strong>₹{totalBills}</strong>
-        </div>
+        <input
+          type="date"
+          value={form.dueDate}
+          onChange={(e) =>
+            setForm({ ...form, dueDate: e.target.value })
+          }
+          required
+        />
 
-      </div>
+        <select
+          value={form.status}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              status: e.target.value as "Paid" | "Pending",
+            })
+          }
+        >
+          <option value="Pending">Pending</option>
+          <option value="Paid">Paid</option>
+        </select>
 
-      <div className="bill-form-card">
-
-        <h2>Add New Bill</h2>
-
-        <div className="bill-form">
-
-          <input
-            type="text"
-            placeholder="Bill Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-
-          <input
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-          />
-
-        </div>
+        <input
+          placeholder="Notes (optional)"
+          value={form.notes}
+          onChange={(e) =>
+            setForm({ ...form, notes: e.target.value })
+          }
+        />
 
         <button
-          className="primary-button"
-          onClick={addBill}
+          type="submit"
+          disabled={saving}
+          style={{
+            padding: 12,
+            background: "#2563eb",
+            color: "white",
+            border: 0,
+            borderRadius: 8,
+            cursor: "pointer",
+          }}
         >
-          Add Bill
+          {saving ? "Saving..." : "Add Bill"}
         </button>
+      </form>
 
-      </div>
+      <h3>Saved Bills</h3>
 
-      <div className="bill-list">
+      {loading ? (
+        <p>Loading bills...</p>
+      ) : bills.length === 0 ? (
+        <p>No bills found. Add your first bill above.</p>
+      ) : (
+        <div style={{ overflowX: "auto" }}>
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              textAlign: "left",
+            }}
+          >
+            <thead>
+              <tr>
+                {["Title", "Category", "Amount", "Due Date", "Status", "Actions"].map(
+                  (heading) => (
+                    <th
+                      key={heading}
+                      style={{ padding: 10, borderBottom: "1px solid #ddd" }}
+                    >
+                      {heading}
+                    </th>
+                  )
+                )}
+              </tr>
+            </thead>
 
-        <h2>Your Bills</h2>
-
-        {bills.map((bill) => (
-          <div className="bill-card" key={bill.id}>
-
-            <div className="bill-icon">
-              🧾
-            </div>
-
-            <div className="bill-info">
-
-              <h3>{bill.name}</h3>
-
-              <p>
-                Due date: {bill.dueDate}
-              </p>
-
-            </div>
-
-            <div className="bill-amount">
-              ₹{bill.amount}
-            </div>
-
-            <span
-              className={
-                bill.status === "Paid"
-                  ? "paid-status"
-                  : "pending-status"
-              }
-            >
-              {bill.status}
-            </span>
-
-            <div className="bill-actions">
-
-              {bill.status === "Pending" && (
-                <button
-                  className="paid-button"
-                  onClick={() => markAsPaid(bill.id)}
-                >
-                  Mark Paid
-                </button>
-              )}
-
-              <button
-                className="delete-button"
-                onClick={() => deleteBill(bill.id)}
-              >
-                Delete
-              </button>
-
-            </div>
-
-          </div>
-        ))}
-
-      </div>
-
+            <tbody>
+              {bills.map((bill) => (
+                <tr key={bill._id}>
+                  <td style={cellStyle}>{bill.title}</td>
+                  <td style={cellStyle}>{bill.category}</td>
+                  <td style={cellStyle}>
+                    ₹{Number(bill.amount).toLocaleString("en-IN")}
+                  </td>
+                  <td style={cellStyle}>
+                    {bill.dueDate
+                      ? new Date(bill.dueDate).toLocaleDateString("en-IN")
+                      : "—"}
+                  </td>
+                  <td style={cellStyle}>{bill.status}</td>
+                  <td style={cellStyle}>
+                    <button onClick={() => updateBill(bill)}>
+                      Mark {bill.status === "Paid" ? "Pending" : "Paid"}
+                    </button>{" "}
+                    <button onClick={() => deleteBill(bill._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
+
+const cardStyle = {
+  flex: "1 1 180px",
+  padding: 16,
+  border: "1px solid #ddd",
+  borderRadius: 12,
+};
+
+const cellStyle = {
+  padding: 10,
+  borderBottom: "1px solid #ddd",
+};
 
 export default Bills;

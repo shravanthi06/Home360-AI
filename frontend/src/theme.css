@@ -1,0 +1,694 @@
+/* =========================================
+   HOME360 AI — THE LIVING BLUEPRINT
+   Premium architectural design system
+========================================= */
+/* ==========================================
+   HOME360 AI — DEEP GREEN VISUAL UPGRADE
+========================================== */
+/* HOME360 AI — SANDAL & FOREST GREEN PALETTE */
+
+:root {
+  --color-paper: #F5EBDD;
+  --color-white: #FFFCF6;
+  --color-ink: #24352A;
+  --color-muted: #77776B;
+  --color-olive: #788365;
+  --color-olive-dark: #244B35;
+  --color-clay: #C66B4E;
+  --color-stone: #E8DDCA;
+  --color-border: #D8CBB6;
+}
+
+html,
+body,
+#root,
+.app-container {
+  background: #F5EBDD !important;
+  color: #24352A;
+}
+
+/* Deep green header */
+
+.app-header,
+.app-navigation,
+.app-footer {
+  background: #244B35 !important;
+  color: #FFFCF6 !important;
+  border-color: rgba(255, 252, 246, 0.18);
+}
+
+.app-header h1,
+.app-header p,
+.app-footer p {
+  color: #FFFCF6 !important;
+}
+
+/* Green navigation with cream active tab */
+
+.app-navigation button {
+  color: #F5EBDD;
+}
+
+.app-navigation button:hover {
+  background: #39664A;
+  color: #FFFFFF;
+}
+
+.app-navigation .active-menu {
+  background: #F5EBDD !important;
+  color: #244B35 !important;
+}
+
+/* Main area stays sandal */
+
+.app-main {
+  background: #F5EBDD !important;
+  color: #24352A !important;
+}
+
+/* Warm cream welcome panel */
+
+.dashboard-welcome {
+  background: #FFFCF6 !important;
+  color: #24352A !important;
+  border: 1px solid #D8CBB6;
+}
+
+.dashboard-welcome h2 {
+  color: #244B35 !important;
+}
+
+.dashboard-welcome p {
+  color: #77776B !important;
+}
+
+/* Clean cream cards */
+
+.module-card {
+  background: #FFFCF6 !important;
+  color: #24352A !important;
+  border: 1px solid #D8CBB6;
+}
+
+.module-card h3,
+.module-card p {
+  color: #24352A !important;
+}
+
+.module-card:hover {
+  border-color: #788365;
+  box-shadow: 0 12px 28px rgba(36, 53, 42, 0.12);
+}
+
+.dashboard-tip {
+  background: #E8DDCA !important;
+  color: #24352A !important;
+}
+
+.dashboard-tip h3,
+.dashboard-tip p {
+  color: #24352A !important;
+}
+
+/* Consistent typography */
+
+.dashboard-welcome h2,
+.modules-heading h2,
+.modules-section h2,
+.page-heading h1,
+.page-heading h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+}
+
+/* Subtle card motion */
+
+.module-card {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .module-card {
+    transition: none;
+  }
+
+  .module-card:hover {
+    transform: none;
+  }
+}
+.app-container {
+  background: #183c2d;
+  color: #f8f4e9;
+}
+
+.app-header,
+.app-navigation,
+.app-footer {
+  background: #183c2d;
+  color: #f8f4e9;
+  border-color: rgba(248, 244, 233, 0.18);
+}
+
+.app-header h1,
+.app-header p,
+.app-footer p {
+  color: #f8f4e9;
+}
+
+.app-navigation button {
+  color: #e1e8d8;
+}
+
+.app-navigation button:hover {
+  background: #315844;
+  color: #ffffff;
+}
+
+.app-navigation .active-menu {
+  background: #e8dfc9;
+  color: #183c2d;
+  border-color: #e8dfc9;
+}
+
+.app-main {
+  background: #183c2d;
+  color: #f8f4e9;
+}
+
+.app-main h1,
+.app-main h2,
+.app-main h3 {
+  color: inherit;
+}
+
+/* Large home photograph */
+
+.dashboard-welcome {
+  position: relative;
+  overflow: hidden;
+  background: #e8dfc9;
+  color: #183c2d;
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+.dashboard-welcome h2 {
+  color: #183c2d;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.dashboard-welcome p {
+  color: #4f5e50;
+}
+
+.welcome-image {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.welcome-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.dashboard-welcome:hover .welcome-image img {
+  transform: scale(1.04);
+}
+
+/* Warm white panels against green */
+
+.module-card {
+  background: #f8f4e9;
+  color: #183c2d;
+  border: 1px solid #d9d0bc;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.module-card h3,
+.module-card p {
+  color: #183c2d;
+}
+
+.module-card > p {
+  opacity: 0.76;
+}
+
+.module-card:hover {
+  transform: translateY(-6px);
+  border-color: #c5a77a;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
+.module-link {
+  color: #426548;
+}
+
+.dashboard-tip {
+  background: #294d39;
+  color: #f8f4e9;
+  border: 1px solid #496a51;
+}
+
+.dashboard-tip h3,
+.dashboard-tip p {
+  color: #f8f4e9;
+}
+
+/* Buttons */
+
+.welcome-button {
+  background: #183c2d;
+  color: #ffffff;
+  border: 1px solid #183c2d;
+  padding: 12px 22px;
+}
+
+.welcome-button:hover {
+  background: #315844;
+  transform: translateY(-2px);
+}
+
+/* Elegant entrance animations */
+
+@keyframes home360-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-welcome {
+  animation: home360-fade-up 650ms ease both;
+}
+
+.dashboard-grid .module-card {
+  animation: home360-fade-up 500ms ease both;
+}
+
+.dashboard-grid .module-card:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.dashboard-grid .module-card:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.dashboard-grid .module-card:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+/* Responsive pictures */
+
+@media (max-width: 700px) {
+  .dashboard-welcome {
+    border-radius: 12px;
+  }
+
+  .welcome-image img {
+    min-height: 190px;
+  }
+
+  .module-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-welcome,
+  .dashboard-grid .module-card {
+    animation: none;
+  }
+
+  .welcome-image img {
+    transition: none;
+  }
+}
+:root {
+  --color-paper: #F5F1E8;
+  --color-white: #FFFFFF;
+  --color-ink: #252820;
+  --color-muted: #77796F;
+  --color-olive: #788365;
+  --color-olive-dark: #536047;
+  --color-clay: #C66B4E;
+  --color-stone: #E5DED0;
+  --color-border: #DED8CC;
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "DM Sans", sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-soft: 0 8px 30px rgba(37, 40, 32, 0.06);
+  --transition-smooth: 220ms ease;
+}
+
+/* Base */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+}
+
+button {
+  transition:
+    background-color var(--transition-smooth),
+    color var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-olive);
+  outline-offset: 3px;
+}
+
+/* Main application */
+
+.app-container {
+  min-height: 100vh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Header */
+
+.app-header {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.app-header h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.app-header p {
+  color: var(--color-muted);
+}
+
+/* Navigation */
+
+.app-navigation {
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--color-border);
+  gap: 8px;
+}
+
+.app-navigation button {
+  background: transparent;
+  color: var(--color-muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.app-navigation button:hover {
+  background: var(--color-stone);
+  color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.app-navigation .active-menu {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+/* Main content */
+
+.app-main {
+  background: transparent;
+  color: var(--color-ink);
+}
+
+/* Dashboard welcome */
+
+.dashboard-welcome {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.dashboard-welcome h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 1.12;
+  color: var(--color-ink);
+}
+
+.dashboard-welcome p {
+  color: var(--color-muted);
+}
+
+.welcome-button {
+  background: var(--color-olive-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-olive-dark);
+  border-radius: 999px;
+}
+
+.welcome-button:hover {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  transform: translateY(-2px);
+}
+
+/* Dashboard section headings */
+
+.modules-heading h2,
+.modules-section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
+.modules-heading p,
+.modules-section > p {
+  color: var(--color-muted);
+}
+
+/* Dashboard cards */
+
+.dashboard-grid {
+  gap: 18px;
+}
+
+.module-card {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-olive);
+  box-shadow: var(--shadow-soft);
+}
+
+.module-card h3 {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.module-card > p {
+  color: var(--color-muted);
+}
+
+.module-link {
+  color: var(--color-olive-dark);
+  font-weight: 700;
+}
+
+/* Dashboard tip */
+
+.dashboard-tip {
+  background: var(--color-stone);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+}
+
+.dashboard-tip h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.dashboard-tip p {
+  color: var(--color-muted);
+}
+
+/* Module page heading */
+
+.page-heading {
+  color: var(--color-ink);
+}
+
+.page-heading h1,
+.page-heading h2,
+.page-heading h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
+.page-heading p {
+  color: var(--color-muted);
+}
+
+/* Forms and tables */
+
+.app-main input,
+.app-main select,
+.app-main textarea {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.app-main input::placeholder,
+.app-main textarea::placeholder {
+  color: #99998F;
+}
+
+.app-main button {
+  border-radius: var(--radius-sm);
+}
+
+.app-main table {
+  background: var(--color-white);
+  border-collapse: collapse;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.app-main th,
+.app-main td {
+  border-color: var(--color-border);
+  padding: 12px 14px;
+}
+
+.app-main th {
+  background: var(--color-stone);
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.app-main td {
+  color: var(--color-ink);
+}
+
+/* Footer */
+
+.app-footer {
+  background: var(--color-paper);
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.app-footer p {
+  color: var(--color-muted);
+}
+
+/* Gentle entrance animation */
+
+@keyframes home360-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-welcome,
+.modules-heading,
+.modules-section,
+.dashboard-tip {
+  animation: home360-enter 500ms ease both;
+}
+
+.modules-section {
+  animation-delay: 80ms;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 700px) {
+  .dashboard-welcome {
+    border-radius: var(--radius-md);
+  }
+
+  .dashboard-grid {
+    gap: 12px;
+  }
+
+  .app-navigation {
+    gap: 6px;
+  }
+
+  .app-main {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
